@@ -86,3 +86,27 @@ read_trips <- function(csv_filename) {
         na = ""
     )
 }
+
+#' Read stop_times.txt.
+#'
+#' @import readr
+read_stop_times <- function(csv_filename) {
+    read_csv(
+        csv_filename,
+        col_types = cols(
+            trip_id = col_character(),
+            arrival_time = col_character(),
+            departure_time = col_character(),
+            stop_id = col_character(),
+            stop_sequence = col_integer(),
+            stop_headsign = col_character(),
+            pickup_type = col_integer(),
+            drop_off_type = col_integer(),
+            shape_dist_traveled = col_double(),
+            timepoint = col_integer(),
+            # For possible extensions.
+            .default = col_character()
+        ),
+        na = ""
+    )
+}
