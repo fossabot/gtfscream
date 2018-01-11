@@ -2,13 +2,17 @@
 #'
 #' @import readr
 read_calendar_dates <- function(csv_filename) {
-    calendar_dates <- read_csv(csv_filename, col_types = cols(
-        service_id = col_character(),
-        date = col_date("%Y%m%d"),
-        exception_type = col_integer(),
-        # For possible extensions.
-        .default = col_character()
-    ))
+    calendar_dates <- read_csv(
+        csv_filename,
+        col_types = cols(
+            service_id = col_character(),
+            date = col_date("%Y%m%d"),
+            exception_type = col_integer(),
+            # For possible extensions.
+            .default = col_character()
+        ),
+        na = ""
+    )
     invalid_calendar_dates <- calendar_dates %>%
         group_by(service_id, date) %>%
         distinct(exception_type) %>%
@@ -29,20 +33,24 @@ read_calendar_dates <- function(csv_filename) {
 #'
 #' @import readr
 read_calendar <- function(csv_filename) {
-    calendar <- read_csv(csv_filename, col_types = cols(
-        service_id = col_character(),
-        monday = col_logical(),
-        tuesday = col_logical(),
-        wednesday = col_logical(),
-        thursday = col_logical(),
-        friday = col_logical(),
-        saturday = col_logical(),
-        sunday = col_logical(),
-        start_date = col_date("%Y%m%d"),
-        end_date = col_date("%Y%m%d"),
-        # For possible extensions.
-        .default = col_character()
-    ))
+    calendar <- read_csv(
+        csv_filename,
+        col_types = cols(
+            service_id = col_character(),
+            monday = col_logical(),
+            tuesday = col_logical(),
+            wednesday = col_logical(),
+            thursday = col_logical(),
+            friday = col_logical(),
+            saturday = col_logical(),
+            sunday = col_logical(),
+            start_date = col_date("%Y%m%d"),
+            end_date = col_date("%Y%m%d"),
+            # For possible extensions.
+            .default = col_character()
+        ),
+        na = ""
+    )
     invalid_calendar <- calendar %>%
         filter(end_date < start_date)
     if (nrow(invalid_calendar) > 0L) {
@@ -59,18 +67,22 @@ read_calendar <- function(csv_filename) {
 #'
 #' @import readr
 read_trips <- function(csv_filename) {
-    read_csv(csv_filename, col_types = cols(
-        route_id = col_character(),
-        service_id = col_character(),
-        trip_id = col_character(),
-        trip_headsign = col_character(),
-        trip_short_name = col_character(),
-        direction_id = col_integer(),
-        block_id = col_character(),
-        shape_id = col_character(),
-        wheelchair_accessible = col_integer(),
-        bikes_allowed = col_integer(),
-        # For possible extensions.
-        .default = col_character()
-    ))
+    read_csv(
+        csv_filename,
+        col_types = cols(
+            route_id = col_character(),
+            service_id = col_character(),
+            trip_id = col_character(),
+            trip_headsign = col_character(),
+            trip_short_name = col_character(),
+            direction_id = col_integer(),
+            block_id = col_character(),
+            shape_id = col_character(),
+            wheelchair_accessible = col_integer(),
+            bikes_allowed = col_integer(),
+            # For possible extensions.
+            .default = col_character()
+        ),
+        na = ""
+    )
 }
