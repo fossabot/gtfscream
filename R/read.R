@@ -162,3 +162,25 @@ read_stops <- function(csv_filename) {
         na = ""
     )
 }
+
+#' Read agency.txt.
+#'
+#' @import readr
+read_agency <- function(csv_filename) {
+    read_csv(
+        csv_filename,
+        col_types = cols(
+            agency_id = col_character(),
+            agency_name = col_character(),
+            agency_url = col_character(),
+            agency_timezone = col_character(),
+            agency_lang = col_character(),
+            agency_phone = col_character(),
+            agency_fare_url = col_character(),
+            agency_email = col_character(),
+            # For possible extensions.
+            .default = col_character()
+        ),
+        na = ""
+    )
+}
