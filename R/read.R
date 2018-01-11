@@ -54,3 +54,23 @@ read_calendar <- function(csv_filename) {
     }
     calendar
 }
+
+#' Read trips.txt.
+#'
+#' @import readr
+read_trips <- function(csv_filename) {
+    read_csv(csv_filename, col_types = cols(
+        route_id = col_character(),
+        service_id = col_character(),
+        trip_id = col_character(),
+        trip_headsign = col_character(),
+        trip_short_name = col_character(),
+        direction_id = col_integer(),
+        block_id = col_character(),
+        shape_id = col_character(),
+        wheelchair_accessible = col_integer(),
+        bikes_allowed = col_integer(),
+        # For possible extensions.
+        .default = col_character()
+    ))
+}
