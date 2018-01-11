@@ -112,3 +112,27 @@ read_stop_times <- function(csv_filename) {
         na = ""
     )
 }
+
+#' Read routes.txt.
+#'
+#' @import readr
+read_routes <- function(csv_filename) {
+    read_csv(
+        csv_filename,
+        col_types = cols(
+            route_id = col_character(),
+            agency_id = col_character(),
+            route_short_name = col_character(),
+            route_long_name = col_character(),
+            route_desc = col_character(),
+            route_type = col_integer(),
+            route_url = col_character(),
+            route_color = col_character(),
+            route_text_color = col_character(),
+            route_sort_order = col_integer(),
+            # For possible extensions.
+            .default = col_character()
+        ),
+        na = ""
+    )
+}
