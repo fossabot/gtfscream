@@ -1,5 +1,6 @@
 #' Read calendar_dates.txt.
 #'
+#' @import dplyr
 #' @import readr
 read_calendar_dates <- function(csv_filename) {
     calendar_dates <- read_csv(
@@ -31,6 +32,7 @@ read_calendar_dates <- function(csv_filename) {
 
 #' Read calendar.txt.
 #'
+#' @import dplyr
 #' @import readr
 read_calendar <- function(csv_filename) {
     calendar <- read_csv(
