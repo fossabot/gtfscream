@@ -4,7 +4,7 @@
 \alias{get_service_ids}
 \title{Get all valid service_ids for a given operating day.}
 \usage{
-get_service_ids(calendar, calendar_dates, date)
+get_service_ids(calendar, calendar_dates = NULL, date)
 }
 \description{
 Get all valid service_ids for a given operating day.

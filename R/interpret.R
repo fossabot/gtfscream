@@ -25,13 +25,15 @@ get_service_ids <- function(calendar, calendar_dates = NULL, date) {
     service_ids
 }
 
-#' Get all valid service_id and operating day combinations.
+#' Get all valid trip_id and operating day combinations.
 #'
-#' @return A tibble with columns service_id and date.
+#' @return A tibble with columns trip_id and date.
 #' @import dplyr
 #' @import purrr
 #' @import tidyr
-combine_calendar <- function(calendar, calendar_dates = NULL) {
+get_trip_calendar <- function(trips, calendar, calendar_dates = NULL) {
+    trimmed_trips <- trips %>%
+        distinct(trip_id, service_id)
     min_date <- min(calendar[["start_date"]])
     max_date <- max(calendar[["end_date"]])
     if (!is.null(calendar_dates)) {
@@ -45,18 +47,8 @@ combine_calendar <- function(calendar, calendar_dates = NULL) {
                 date = date
             )
         }) %>%
-        unnest()
-}
-
-#' Read calendar and get valid service_id and operating day combinations.
-#'
-#' @return A tibble with columns service_id and date.
-prepare_calendar <- function(calendar_csv_filename,
-                             calendar_dates_csv_filename = NULL) {
-    calendar <- read_calendar(calendar_csv_filename)
-    calendar_dates <- NULL
-    if (!is.null(calendar_dates_csv_filename)) {
-        calendar_dates <- read_calendar_dates(calendar_dates_csv_filename)
-    }
-    combine_calendar(calendar, calendar_dates)
+        unnest() %>%
+        inner_join(trimmed_trips, by = "service_id") %>%
+        distinct(trip_id, date) %>%
+        arrange(trip_id, date)
 }
