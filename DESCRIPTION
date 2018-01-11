@@ -1,0 +1,10 @@
+Package: gtfsanalysis
+Title: Various Tools for Analyzing GTFS data
+Version: 0.0.0.9000
+Authors@R: person("haphut", email = "haphut@gmail.com", role = c("aut", "cre"))
+Description: Various Tools for Analyzing GTFS data
+Depends: R (>= 3.4.3)
+License: AGPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
