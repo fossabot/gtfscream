@@ -1,13 +1,16 @@
 #' Get all valid service_ids for a given operating day.
 #'
 #' @import dplyr
+#' @import lubridate
 get_service_ids <- function(calendar, calendar_dates = NULL, date) {
     service_ids <- calendar %>%
         filter(
             start_date <= date,
             end_date >= date
         ) %>%
-        filter_(tolower(weekdays(date))) %>%
+        filter_(
+            tolower(wday(date, label = TRUE, abbr = FALSE, locale = "C"))
+        ) %>%
         select(service_id)
     if (!is.null(calendar_dates)) {
         exceptions <- calendar_dates %>%
